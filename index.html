@@ -919,6 +919,63 @@ tbody td { padding: 11px 12px; }
     font-size: 16px; /* biar iPhone gak zoom */
   }
 }
+    /* ==========================================
+   MOBILE NAVBAR
+========================================== */
+
+.menu-toggle {
+  display: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 26px;
+  color: var(--blue);
+  padding: 6px;
+}
+
+@media (max-width:768px){
+
+  #navbar{
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    padding: 0 16px;
+    height: 60px;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav-cta{
+    display:none;
+  }
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:60px;
+    left:0;
+    right:0;
+    background:#fff;
+    flex-direction:column;
+    gap:0;
+    padding:10px;
+    border-top:1px solid rgba(0,0,0,.08);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    z-index:1000;
+  }
+
+  .nav-links.show{
+    display:flex;
+  }
+
+  .nav-btn{
+    width:100%;
+    text-align:left;
+    padding:12px 14px;
+  }
+}
   </style>
 </head>
 <body>
@@ -926,16 +983,24 @@ tbody td { padding: 11px 12px; }
 <!-- ===================== NAVBAR ===================== -->
 <nav id="navbar">
   <div class="nav-logo">
-    <i class="ti ti-package"></i> HazzParcel
+    <i class="ti ti-package"></i>
+    HazzParcel
   </div>
+
+  <button id="menu-toggle" class="menu-toggle">
+    <i class="ti ti-menu-2"></i>
+  </button>
+
   <div class="nav-links">
     <button class="nav-btn active" data-page="beranda">Beranda</button>
     <button class="nav-btn" data-page="kirim">Kirim Paket</button>
     <button class="nav-btn" data-page="riwayat">Riwayat</button>
     <button class="nav-btn" data-page="lacak">Lacak Paket</button>
   </div>
+
   <button class="btn-primary nav-cta" data-page="kirim">
-    <i class="ti ti-send"></i> Kirim Sekarang
+    <i class="ti ti-send"></i>
+    Kirim Sekarang
   </button>
 </nav>
 
@@ -1330,15 +1395,36 @@ async function seedIfEmpty() {
    NAVIGATION
    ============================================================ */
 function showPage(pageId) {
-  // fixed: also remove .hidden
-  document.querySelectorAll(".page").forEach(p => { p.classList.remove("active"); p.classList.remove("hidden"); });
-  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active");
+    p.classList.remove("hidden");
+  });
+
+  document.querySelectorAll(".nav-btn").forEach(b => {
+    b.classList.remove("active");
+  });
+
   const target = document.getElementById(pageId);
-  if (target) target.classList.add("active");
-  const btn2 = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
-  if (btn2) btn2.classList.add("active");
-  if (pageId === "beranda") loadBeranda();
-  if (pageId === "riwayat") { currentPage = 1; loadRiwayat(); }
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  const btn = document.querySelector(`[data-page="${pageId}"]`);
+
+  if(btn){
+    btn.classList.add("active");
+  }
+
+  navLinks.classList.remove("show");
+
+  if(pageId === "beranda") loadBeranda();
+
+  if(pageId === "riwayat"){
+    currentPage = 1;
+    loadRiwayat();
+  }
 }
 /* nav button clicks */
 document.body.addEventListener('click', e => {
@@ -1703,6 +1789,12 @@ document.getElementById('modal-cetak').addEventListener('click', () => window.pr
 /* ============================================================
    INIT
    ============================================================ */
+  const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("show");
+});
 (async () => {
   await seedIfEmpty();
   showPage('beranda');
