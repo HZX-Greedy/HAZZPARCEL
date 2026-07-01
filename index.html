@@ -756,6 +756,169 @@ tbody td { padding: 11px 12px; }
   .modal-grid { grid-template-columns: 1fr; }
   .tr-grid { grid-template-columns: 1fr; }
 }
+    /* ===================================
+   MOBILE RESPONSIVE FIX
+   =================================== */
+
+@media (max-width: 768px) {
+
+  /* Navbar */
+  #navbar {
+    padding: 0 12px;
+    height: auto;
+    min-height: 60px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .nav-logo {
+    font-size: 16px;
+  }
+
+  .nav-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 24px 18px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .hero p {
+    max-width: 100%;
+  }
+
+  .hero-btns {
+    justify-content: center;
+  }
+
+  .hero-btns button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Statistik */
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card .value {
+    font-size: 20px;
+  }
+
+  /* Filter */
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-bar select,
+  .search-wrap {
+    width: 100%;
+  }
+
+  /* Form */
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Ongkir */
+  .ongkir-box {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  /* Tracking */
+  .lacak-input-row {
+    flex-direction: column;
+  }
+
+  .lacak-input-row button {
+    width: 100%;
+  }
+
+  /* Modal */
+  .modal-box {
+    width: 100%;
+    max-height: 95vh;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+
+  .modal-footer button {
+    width: 100%;
+  }
+
+  /* Table */
+  table {
+    min-width: 900px;
+  }
+
+  /* Pagination */
+  .pagination {
+    gap: 6px;
+  }
+
+  .pagination button {
+    min-width: 40px;
+  }
+}
+
+
+/* ===================================
+   EXTRA SMALL DEVICE
+   =================================== */
+
+@media (max-width: 480px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  .page {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .hero h1 {
+    font-size: 20px;
+  }
+
+  .section-title {
+    font-size: 15px;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-white,
+  .btn-outline {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 16px; /* biar iPhone gak zoom */
+  }
+}
   </style>
 </head>
 <body>
